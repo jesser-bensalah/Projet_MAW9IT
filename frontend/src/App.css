@@ -1,0 +1,487 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+:root{
+  --primaryColor: hsl(94, 55%, 56%);
+  --hoverColor: hsl(93, 75%, 76%);
+  --paleGreen: hsl(96, 75%, 89%);
+  --whiteColor: hsl(0, 0%, 100%);
+  --blackColor: hsl(0, 0%, 18%);
+  --greyText: hsl(0, 0%, 75%);
+  --bgColor: hsl(113, 11%, 85%);
+  --inputColor: hsl(330, 12%, 97%);
+  --inputColor: hsl(154, 14%, 90%);
+
+  --biggestFontSize: 2.5rem;
+  --h1FontSize: 1.5rem;
+  --h2FontSize: 1.25rem;
+  --h3FontSize: 1rem;
+  --normalFontSize: .938rem;
+  --smallFontSize: .813rem;
+  --smallestFontSize: .75rem;
+}
+
+.flex{
+  display: flex;
+  align-items: center;
+}
+
+.grid{
+  display: grid;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+html{
+  font-size: 90%;
+}
+
+a{
+  text-decoration: none;
+}
+
+li{
+  list-style: none;
+}
+
+.icon{
+  font-size: var(--h2FontSize);
+  cursor: pointer;
+}
+
+img, video{
+  height: auto;
+  width: 100%;
+}
+
+.message{
+  display: none;
+}
+
+.showMessage{
+  display: block;
+  color: var(--whiteColor);
+  background: rgb(255, 0, 0);
+  border-radius: 3px;
+  text-align: center;
+}
+
+.btn{
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: .8rem 1rem;
+  color: var(--greyText);
+}
+
+.btn1{
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: .8rem 1rem;
+  color: var(--greyText);
+}
+
+.btn .icon{
+  margin-left: .5rem;
+}
+
+.btn:hover{
+  color: var(--primaryColor);
+  background: var(--paleGreen);
+}
+
+.formulaireChauffeur{
+  height: 100vh;
+  width: 100%;
+  margin: auto;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 7px 50px rgb(214, 223, 213);
+}
+
+.formulaireChauffeur .container{
+  height: 75vh;
+  width: 80%;
+  margin: auto;
+  justify-content: space-between;
+  border-radius: 10px;
+  background: hsl(0, 0%, 91%);
+}
+
+.formulaireChauffeur .videoDiv {
+  position: relative;
+  width: 100%;
+  padding: 2rem;
+}
+
+.formulaireChauffeur .videoDiv img {
+  border-radius: 15px;
+  height: 490px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.formulaireChauffeur .textDiv {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.formulaireChauffeur .title {
+  font-size: var(--h1FontSize);
+  color: var(--blackColor);
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.formulaireChauffeur .btn {
+  background: var(--primaryColor);
+  color: var(--whiteColor);
+  font-weight: bold;
+  padding: 12px 30px;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.formulaireChauffeur .btn:hover {
+  background: var(--hoverColor);
+  color: var(--blackColor);
+}
+
+.formulaireChauffeur .btn1 {
+  background: var(--primaryColor);
+  color: var(--whiteColor);
+  font-weight: bold;
+  padding: 12px 30px;
+  width: fit-content;
+  margin-top: -55px;
+  margin-right: -300px;
+}
+
+.formulaireChauffeur .btn1:hover {
+  background: var(--hoverColor);
+  color: var(--blackColor);
+}
+
+
+.formulaireChauffeur .formDiv {
+  width: 90%;
+  height: 490px;
+  padding: 2rem;
+  background: var(--whiteColor);
+  border-radius: 10px;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
+}
+
+.formulaireChauffeur .headerDiv h3 {
+  font-size: var(--h2FontSize);
+  color: var(--blackColor);
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.formulaireChauffeur .formContent {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.formulaireChauffeur .inputDiv {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  flex-grow: 1;
+}
+
+.formulaireChauffeur .inputDiv > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.formulaireChauffeur .buttonContainer {
+  grid-column: span 2;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  gap: 1rem;
+}
+
+.formulaireChauffeur .inputDiv label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--blackColor);
+  font-weight: 600;
+}
+
+.formulaireChauffeur .inputDiv input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid var(--inputColor);
+  border-radius: 8px;
+  font-size: var(--normalFontSize);
+  background: var(--inputColor);
+}
+
+.formulaireChauffeur .inputDiv input:focus {
+  outline: none;
+  border-color: var(--primaryColor);
+}
+
+
+.formulaireChauffeur .inputRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.formulaireChauffeur .inputPair {
+  display: flex;
+  flex-direction: column;
+}
+
+.formulaireChauffeur .inputPair label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--blackColor);
+  font-weight: 600;
+}
+
+.formulaireChauffeur .inputPair input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid var(--inputColor);
+  border-radius: 8px;
+  font-size: var(--normalFontSize);
+  background: var(--inputColor);
+}
+
+.formulaireChauffeur .inputPair input:focus {
+  outline: none;
+  border-color: var(--primaryColor);
+}
+
+
+
+.chauffeur-list {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.chauffeur-list h2 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.refresh-btn {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.refresh-btn:hover {
+  background: #2980b9;
+}
+
+.chauffeurs-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.chauffeurs-table thead {
+  background: #34495e;
+  color: white;
+}
+
+.chauffeurs-table th {
+  padding: 15px 10px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.chauffeurs-table tbody tr {
+  border-bottom: 1px solid #ecf0f1;
+  transition: background 0.3s ease;
+}
+
+.chauffeurs-table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.chauffeurs-table tbody tr:nth-child(even) {
+  background: #f8f9fa;
+}
+
+.chauffeurs-table tbody tr:nth-child(even):hover {
+  background: #e9ecef;
+}
+
+.chauffeurs-table td {
+  padding: 12px 10px;
+  font-size: 14px;
+  color: #2c3e50;
+}
+
+.chauffeurs-table input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #bdc3c7;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.chauffeurs-table input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+
+.edit-btn, .delete-btn, .save-btn, .cancel-btn {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  margin: 2px;
+  transition: all 0.3s ease;
+}
+
+.edit-btn {
+  background: #f39c12;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #e67e22;
+}
+
+.delete-btn {
+  background: #e74c3c;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #c0392b;
+}
+
+.save-btn {
+  background: #27ae60;
+  color: white;
+}
+
+.save-btn:hover {
+  background: #229954;
+}
+
+.cancel-btn {
+  background: #95a5a6;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background: #7f8c8d;
+}
+
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: #7f8c8d;
+}
+
+.error {
+  background: #e74c3c;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 20px;
+}
+
+
+@media (max-width: 768px) {
+  .chauffeurs-table {
+    font-size: 12px;
+  }
+  
+  .chauffeurs-table th,
+  .chauffeurs-table td {
+    padding: 8px 5px;
+  }
+  
+  .edit-btn, .delete-btn, .save-btn, .cancel-btn {
+    padding: 6px 8px;
+    font-size: 10px;
+  }
+}
