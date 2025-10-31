@@ -8,6 +8,7 @@ import { FormulairechauffeurModule } from './formulairechauffeur/formulairechauf
 import { FormulairemécanicienModule } from './formulairemécanicien/formulairemécanicien.module';
 import { CaspanneModule } from './caspanne/caspanne.module';
 import { CasretardModule } from './casretard/casretard.module';
+import { MessagesModule } from './messages/messages.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { CasretardModule } from './casretard/casretard.module';
     FormulairemécanicienModule,
     CaspanneModule,
     CasretardModule,
+    MessagesModule,
   ],
 })
 export class AppModule {}

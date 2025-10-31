@@ -28,6 +28,11 @@ const DriverDashboard = () => {
     navigate('/liste-mecaniciens-chauffeur');
   };
 
+  const goToMessagerie = () => {
+    navigate('/chat');
+  };
+
+
   return (
     <div className="dashboard-container">
       <nav className="dashboard-nav">
@@ -76,7 +81,7 @@ const DriverDashboard = () => {
           <div className="dashboard-card">
             <h3>💬 Chatbot</h3>
             <p>Communiquer avec les mécaniciens</p>
-            <button className="card-btn">Ouvrir</button>
+            <button className="card-btn" onClick={goToMessagerie}>Ouvrir</button>
           </div>
         </div>
       </main>

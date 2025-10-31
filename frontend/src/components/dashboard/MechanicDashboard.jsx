@@ -16,6 +16,10 @@ const MechanicDashboard = () => {
     navigate('/formulairemecanicien');
   };
 
+   const goToMessagerie = () => {
+    navigate('/chat');
+  };
+
 
   return (
     <div className="dashboard-container">
@@ -53,7 +57,7 @@ const MechanicDashboard = () => {
           <div className="dashboard-card">
             <h3>💬 Chatbot</h3>
             <p>Communiquer avec les chauffeurs</p>
-            <button className="card-btn">Ouvrir</button>
+            <button className="card-btn" onClick={goToMessagerie}>Ouvrir</button>
           </div>
 
           <div className="dashboard-card">
