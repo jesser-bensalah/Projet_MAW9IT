@@ -9,6 +9,8 @@ import { FormulairemécanicienModule } from './formulairemécanicien/formulairem
 import { CaspanneModule } from './caspanne/caspanne.module';
 import { CasretardModule } from './casretard/casretard.module';
 import { MessagesModule } from './messages/messages.module';
+import { CasdepartModule } from './casdepart/casdepart.module';
+import { MapModule } from './map/map.module';
 
 @Module({
   imports: [
@@ -48,6 +50,8 @@ import { MessagesModule } from './messages/messages.module';
     CaspanneModule,
     CasretardModule,
     MessagesModule,
+    CasdepartModule,
+    MapModule,
   ],
 })
 export class AppModule {}

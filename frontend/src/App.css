@@ -485,3 +485,299 @@ img, video{
     font-size: 10px;
   }
 }
+/* Styles pour le formulaire modale */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 300px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.form-buttons button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-buttons button[type="submit"] {
+  background: #007bff;
+  color: white;
+}
+
+.form-buttons button[type="button"] {
+  background: #6c757d;
+  color: white;
+}
+
+/* Styles pour le compteur de points */
+.points-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.points-counter {
+  margin-top: 10px;
+}
+
+.counter-badge {
+  background: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+.floating-counter {
+  position: absolute;
+  top: 100px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.counter-card {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #e0e0e0;
+  min-width: 120px;
+}
+
+.counter-icon {
+  font-size: 24px;
+}
+
+.counter-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.counter-number {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+  line-height: 1;
+}
+
+.counter-label {
+  font-size: 12px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Style pour le formulaire */
+.new-point-info {
+  text-align: center;
+  margin-bottom: 15px;
+  padding: 8px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 4px solid #007bff;
+}
+
+.new-point-info small {
+  color: #007bff;
+  font-weight: 500;
+}
+
+/* Style pour les popups */
+.point-position {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #eee;
+}
+
+.point-position small {
+  color: #666;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .floating-counter {
+    top: 80px;
+    right: 10px;
+  }
+  
+  .counter-card {
+    padding: 10px;
+    min-width: 100px;
+  }
+  
+  .counter-number {
+    font-size: 20px;
+  }
+}
+
+/* Styles pour les distances */
+.distance-toggle {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background 0.3s;
+}
+
+.distance-toggle:hover {
+  background: #218838;
+}
+
+.distance-toggle.active {
+  background: #dc3545;
+}
+
+.distances-panel {
+  position: absolute;
+  top: 120px;
+  left: 20px;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  max-width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.distances-panel h3 {
+  margin: 0 0 15px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.distances-list {
+  margin-bottom: 15px;
+}
+
+.distance-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.distance-item:last-child {
+  border-bottom: none;
+}
+
+.distance-points {
+  font-size: 12px;
+  color: #666;
+}
+
+.distance-value {
+  font-weight: bold;
+  color: #007bff;
+  font-size: 12px;
+}
+
+.total-distance {
+  padding-top: 10px;
+  border-top: 2px solid #007bff;
+  text-align: center;
+  color: #333;
+}
+
+.distance-badge {
+  background: #17a2b8;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.distance-total {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.distance-label {
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.point-distance {
+  margin-top: 4px;
+  padding: 2px 0;
+  border-top: 1px dashed #eee;
+}
+
+/* Lignes de distance sur la carte */
+.leaflet-interactive {
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .distances-panel {
+    top: 100px;
+    left: 10px;
+    right: 10px;
+    max-width: none;
+  }
+  
+  .points-counter {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .distance-toggle {
+    margin-left: 0;
+  }
+}

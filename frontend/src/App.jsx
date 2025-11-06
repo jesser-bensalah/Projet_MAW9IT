@@ -17,6 +17,9 @@ import ListeCasRetard from './pages/ListeCasRetard';
 import ListeMecanicienChauffeur from './pages/ListeMacanicienChauffeur';
 import UserManagement from './components/admin/UserManagement';
 import Chat from './components/Chat';
+import CasDepart from './pages/CasDepart';
+import ListeCasDepart from './pages/ListeCasDepart';
+import Map from './pages/Map';
 function App() {
   return (
     <Router>
@@ -39,6 +42,9 @@ function App() {
           <Route path="/liste-cas-panne" element={<ListeCasPanne />} />
           <Route path="/liste-mecaniciens-chauffeur" element={<ListeMecanicienChauffeur />} />
           <Route path="/chat" element={<Chat />} />
+          <Route path="/cas-depart" element={<CasDepart />} />
+          <Route path="/liste-cas-depart" element={<ListeCasDepart />} />
+          <Route path="/map" element={<Map />} />
         </Routes>
       </div>
     </Router>

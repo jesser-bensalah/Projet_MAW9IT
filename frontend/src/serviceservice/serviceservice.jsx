@@ -109,4 +109,29 @@ export const servicesrvice = {
     const response = await API.delete(`/caspanne/${idCasPanne}`);
     return response.data;
   },
+
+  createDepart: async (data) => {
+    const response = await API.post('/casdepart', data);
+    return response.data;
+  },
+  
+  getAllDeparts: async () => {
+    const response = await API.get('/casdepart');
+    return response.data;
+  },
+  
+  getDepartById: async (idCasDepart) => {
+    const response = await API.get(`/casdepart/${idCasDepart}`);
+    return response.data;
+  },
+  
+  updateDepart: async (idCasDepart, data) => {
+    const response = await API.patch(`/casdepart/${idCasDepart}`, data);
+    return response.data;
+  },
+  
+  deleteDepart: async (idCasDepart) => {
+    const response = await API.delete(`/casdepart/${idCasDepart}`);
+    return response.data;
+  },
 };

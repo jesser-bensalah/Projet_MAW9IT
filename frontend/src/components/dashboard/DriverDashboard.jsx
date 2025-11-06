@@ -32,6 +32,10 @@ const DriverDashboard = () => {
     navigate('/chat');
   };
 
+  const goToFormDepart = () => {
+    navigate('/cas-depart');
+  };
+
 
   return (
     <div className="dashboard-container">
@@ -70,6 +74,12 @@ const DriverDashboard = () => {
             <h3>🚨 Signaler un retard</h3>
             <p>Envoyer une notification au passager</p>
             <button className="card-btn" onClick={goToFormRetard}>Signaler</button>
+          </div>
+
+          <div className="dashboard-card">
+            <h3>🚨 Signaler un départ</h3>
+            <p>Envoyer une notification au passager</p>
+            <button className="card-btn" onClick={goToFormDepart}>Signaler</button>
           </div>
 
           <div className="dashboard-card">
