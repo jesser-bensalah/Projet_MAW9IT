@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { notificationsService } from '../../services/notificationsService';
+import { socketService } from '../../services/socketService';
 import './DriverBellNotification.css';
 
 const DriverBellNotification = ({ userId }) => {
@@ -8,19 +9,22 @@ const DriverBellNotification = ({ userId }) => {
   const [unreadCount, setUnreadCount] = useState(0);
   const [showDropdown, setShowDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isConnected, setIsConnected] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (userId) {
+      // Charger les notifications initiales
       loadNotifications();
       
-      // Configurer le polling pour les mises à jour en temps réel
-      const interval = setInterval(() => {
-        loadNotifications();
-      }, 30000); // Mise à jour toutes les 30 secondes
+      // Configurer WebSocket
+      setupWebSocket();
       
-      return () => clearInterval(interval);
+      return () => {
+        // Nettoyer les listeners WebSocket à la destruction du composant
+        socketService.removeAllListeners();
+      };
     }
   }, [userId]);
 
@@ -37,14 +41,136 @@ const DriverBellNotification = ({ userId }) => {
     };
   }, []);
 
+  const setupWebSocket = () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        // Se connecter au WebSocket
+        const socket = socketService.connect(token);
+        
+        // Écouter les événements de connexion
+        socket.on('connected', (data) => {
+          console.log('🔌 Connecté au service de notifications en temps réel');
+          setIsConnected(true);
+        });
+
+        // Écouter les nouvelles notifications en temps réel
+        socketService.onNotification((newNotification) => {
+          console.log('📨 Nouvelle notification reçue en temps réel:', newNotification);
+          
+          // Vérifier que c'est une notification pour cet utilisateur
+          if (newNotification.driverId === userId) {
+            handleNewNotification(newNotification);
+          }
+        });
+
+        // Écouter les notifications marquées comme lues
+        socketService.onNotificationRead((data) => {
+          console.log('📖 Notification marquée comme lue:', data);
+        });
+
+        // Écouter les erreurs de connexion
+        socket.on('connect_error', (error) => {
+          console.error('❌ Erreur de connexion WebSocket:', error);
+          setIsConnected(false);
+        });
+
+        // Écouter la déconnexion
+        socket.on('disconnect', (reason) => {
+          console.log('🔌 Déconnecté du WebSocket:', reason);
+          setIsConnected(false);
+        });
+
+      } catch (error) {
+        console.error('❌ Erreur lors de la configuration WebSocket:', error);
+      }
+    } else {
+      console.warn('⚠️ Token non trouvé, WebSocket non initialisé');
+    }
+  };
+
+  const handleNewNotification = (newNotification) => {
+    // Vérifier que c'est une notification de type réponse (acceptance, rejection, resolved)
+    const isResponseNotification = 
+      newNotification.type === 'acceptance' || 
+      newNotification.type === 'rejection' || 
+      newNotification.type === 'resolved';
+
+    if (isResponseNotification) {
+      setNotifications(prev => {
+        // Éviter les doublons
+        const exists = prev.find(n => n.id === newNotification.id);
+        if (exists) return prev;
+        
+        // Ajouter la nouvelle notification en haut de la liste
+        return [newNotification, ...prev];
+      });
+      
+      // Incrémenter le compteur de notifications non lues
+      setUnreadCount(prev => prev + 1);
+      
+      // Jouer un son de notification (optionnel)
+      playNotificationSound();
+      
+      // Afficher une notification toast (optionnel)
+      showToastNotification(newNotification);
+    }
+  };
+
+  const playNotificationSound = () => {
+    // Créer un son de notification simple
+    try {
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.frequency.value = 800;
+      oscillator.type = 'sine';
+      
+      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+      
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.5);
+    } catch (error) {
+      console.log('🔇 Audio non supporté');
+    }
+  };
+
+  const showToastNotification = (notification) => {
+    // Créer une notification toast native du navigateur
+    if ('Notification' in window && Notification.permission === 'granted') {
+      new Notification(getNotificationTitle(notification), {
+        body: getNotificationMessage(notification),
+        icon: '/favicon.ico',
+        tag: 'maw9it-notification'
+      });
+    }
+    
+    // Demander la permission si ce n'est pas déjà fait
+    else if ('Notification' in window && Notification.permission === 'default') {
+      Notification.requestPermission().then(permission => {
+        if (permission === 'granted') {
+          new Notification(getNotificationTitle(notification), {
+            body: getNotificationMessage(notification),
+            icon: '/favicon.ico'
+          });
+        }
+      });
+    }
+  };
+
   const loadNotifications = async () => {
     try {
       setIsLoading(true);
       
-      // Charger toutes les notifications du chauffeur (y compris les réponses)
+      // Charger toutes les notifications du chauffeur
       const response = await notificationsService.getDriverNotifications(userId);
       
-      // Filtrer pour ne garder que les notifications d'acceptation et de rejet
+      // Filtrer pour ne garder que les notifications d'acceptation, rejet et résolution
       const filteredNotifications = response.data.filter(
         notif => notif.type === 'acceptance' || notif.type === 'rejection' || notif.type === 'resolved'
       );
@@ -56,7 +182,7 @@ const DriverBellNotification = ({ userId }) => {
       
       setNotifications(sortedNotifications);
       
-      // Calculer le nombre de notifications non lues parmi les notifications filtrées
+      // Calculer le nombre de notifications non lues
       const unread = sortedNotifications.filter(notif => !notif.isRead).length;
       setUnreadCount(unread);
       
@@ -69,6 +195,12 @@ const DriverBellNotification = ({ userId }) => {
 
   const handleBellClick = () => {
     setShowDropdown(!showDropdown);
+    
+    // Si on ouvre le dropdown et qu'il y a des notifications non lues, on peut optionnellement les marquer comme lues
+    if (!showDropdown && unreadCount > 0) {
+      // Option: Marquer automatiquement comme lues quand on ouvre
+      // markAllAsRead();
+    }
   };
 
   const markAllAsRead = async () => {
@@ -76,6 +208,14 @@ const DriverBellNotification = ({ userId }) => {
       await notificationsService.markAllAsReadForDriver(userId);
       setUnreadCount(0);
       setNotifications(prev => prev.map(notif => ({ ...notif, isRead: true })));
+      
+      // Notifier via WebSocket que toutes les notifications ont été lues
+      notifications.forEach(notification => {
+        if (!notification.isRead) {
+          socketService.markNotificationRead(notification.id);
+        }
+      });
+      
     } catch (error) {
       console.error('Erreur lors du marquage comme lu:', error);
     }
@@ -83,7 +223,7 @@ const DriverBellNotification = ({ userId }) => {
 
   const handleNotificationClick = async (notification) => {
     try {
-      // Marquer comme lue
+      // Marquer comme lue si ce n'est pas déjà fait
       if (!notification.isRead) {
         await notificationsService.markAsRead(notification.id);
         
@@ -96,14 +236,17 @@ const DriverBellNotification = ({ userId }) => {
         
         // Mettre à jour le compteur
         setUnreadCount(prev => Math.max(0, prev - 1));
+        
+        // Notifier via WebSocket
+        socketService.markNotificationRead(notification.id);
       }
       
       // Fermer le dropdown après un court délai
       setTimeout(() => setShowDropdown(false), 300);
       
-      // Rediriger si c'est une réponse de panne
-      if (notification.type === 'acceptance' || notification.type === 'rejection') {
-        navigate('/cas-panne'); // Rediriger vers la page des pannes
+      // Rediriger vers la page appropriée selon le type de notification
+      if (notification.type === 'acceptance' || notification.type === 'rejection' || notification.type === 'resolved') {
+        navigate('/liste-cas-panne'); // Rediriger vers la liste des pannes
       }
     } catch (error) {
       console.error('Erreur lors du traitement de la notification:', error);
@@ -112,18 +255,12 @@ const DriverBellNotification = ({ userId }) => {
 
   const getNotificationIcon = (type) => {
     switch (type) {
-      case 'breakdown':
-        return '🔧';
       case 'acceptance':
         return '✅';
       case 'rejection':
         return '❌';
       case 'resolved':
         return '✔️';
-      case 'delay':
-        return '⏱️';
-      case 'departure':
-        return '🚗';
       default:
         return '🔔';
     }
@@ -131,20 +268,14 @@ const DriverBellNotification = ({ userId }) => {
   
   const getNotificationTitle = (notification) => {
     switch (notification.type) {
-      case 'breakdown':
-        return 'Panne signalée';
       case 'acceptance':
-        return 'Panne acceptée';
+        return 'Panne Acceptée ✅';
       case 'rejection':
-        return 'Panne refusée';
+        return 'Panne Refusée ❌';
       case 'resolved':
-        return 'Panne résolue';
-      case 'delay':
-        return 'Retard signalé';
-      case 'departure':
-        return 'Départ signalé';
+        return 'Panne Résolue ✔️';
       default:
-        return notification.title || 'Nouvelle notification';
+        return notification.title || 'Réponse du mécanicien';
     }
   };
   
@@ -153,13 +284,26 @@ const DriverBellNotification = ({ userId }) => {
     
     switch (notification.type) {
       case 'acceptance':
-        return `Le mécanicien ${notification.mechanic?.prenom || 'a accepté'} votre demande d'intervention.`;
+        return `Votre panne a été acceptée par le mécanicien. Il interviendra rapidement.`;
       case 'rejection':
-        return `Le mécanicien ${notification.mechanic?.prenom || 'a refusé'} votre demande d'intervention.`;
+        return `Votre panne a été refusée par le mécanicien. Veuillez contacter un autre mécanicien.`;
       case 'resolved':
-        return `La panne a été marquée comme résolue par le mécanicien ${notification.mechanic?.prenom || ''}.`;
+        return `Votre panne a été marquée comme résolue par le mécanicien.`;
       default:
-        return 'Vous avez une nouvelle notification';
+        return 'Réponse concernant votre panne';
+    }
+  };
+
+  const getStatusText = (type) => {
+    switch (type) {
+      case 'acceptance':
+        return 'Acceptée';
+      case 'rejection':
+        return 'Refusée';
+      case 'resolved':
+        return 'Résolue';
+      default:
+        return 'Traitée';
     }
   };
 
@@ -184,13 +328,24 @@ const DriverBellNotification = ({ userId }) => {
     return date.toLocaleDateString('fr-FR');
   };
 
+  const handleReloadNotifications = () => {
+    loadNotifications();
+  };
+
   return (
     <div className="bell-notification-container" ref={dropdownRef}>
       <div className="bell-icon" onClick={handleBellClick}>
-        <span className={`bell ${unreadCount > 0 ? 'bell-ring' : ''}`}>🔔</span>
+        <span className={`bell ${unreadCount > 0 ? 'bell-ring bell-pulse' : ''} ${isConnected ? 'connected' : 'disconnected'}`}>
+          {unreadCount > 0 ? '🔔' : '🔕'}
+        </span>
         {unreadCount > 0 && (
           <span className="notification-badge">
             {unreadCount > 99 ? '99+' : unreadCount}
+          </span>
+        )}
+        {!isConnected && (
+          <span className="connection-indicator" title="Déconnecté">
+            🔴
           </span>
         )}
       </div>
@@ -198,7 +353,24 @@ const DriverBellNotification = ({ userId }) => {
       {showDropdown && (
         <div className="notifications-dropdown">
           <div className="dropdown-header">
-            <h3>Notifications ({unreadCount})</h3>
+            <div className="header-top">
+              <h3>Réponses Mécaniciens ({unreadCount})</h3>
+              <div className="header-actions">
+                <button 
+                  className="reload-btn"
+                  onClick={handleReloadNotifications}
+                  title="Rafraîchir"
+                  disabled={isLoading}
+                >
+                  🔄
+                </button>
+                {!isConnected && (
+                  <span className="ws-status" title="Connexion WebSocket perdue">
+                    🔴
+                  </span>
+                )}
+              </div>
+            </div>
             {unreadCount > 0 && (
               <button 
                 className="mark-all-read" 
@@ -214,11 +386,12 @@ const DriverBellNotification = ({ userId }) => {
             {isLoading ? (
               <div className="loading-notifications">
                 <div className="loading-spinner"></div>
-                <p>Chargement des notifications...</p>
+                <p>Chargement des réponses...</p>
               </div>
             ) : notifications.length === 0 ? (
               <div className="no-notifications">
-                Aucune notification
+                <p>Aucune réponse de mécanicien</p>
+                <small>Les réponses à vos pannes apparaîtront ici</small>
               </div>
             ) : (
               notifications.map(notification => (
@@ -239,17 +412,37 @@ const DriverBellNotification = ({ userId }) => {
                     </div>
                     {notification.mechanic && (
                       <div className="notification-sender">
-                        Mécanicien : {notification.mechanic.prenom} {notification.mechanic.nom}
+                        <strong>Mécanicien :</strong> {notification.mechanic.prenom} {notification.mechanic.nom}
                       </div>
                     )}
+                    <div className="notification-status">
+                      <strong>Statut :</strong> {getStatusText(notification.type)}
+                    </div>
                     <div className="notification-time">
                       {formatDate(notification.createdAt)}
                     </div>
                   </div>
+                  {!notification.isRead && (
+                    <div className="unread-indicator"></div>
+                  )}
                 </div>
               ))
             )}
           </div>
+
+          {notifications.length > 0 && (
+            <div className="dropdown-footer">
+              <button 
+                className="view-all-breakdowns"
+                onClick={() => {
+                  setShowDropdown(false);
+                  navigate('/liste-cas-panne');
+                }}
+              >
+                Voir toutes mes pannes
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>

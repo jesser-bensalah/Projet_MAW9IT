@@ -286,7 +286,32 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+/* Animation pour la cloche qui pulse quand il y a une nouvelle notification */
+.bell-pulse {
+  animation: pulse 1s infinite;
+}
 
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Style pour la notification en temps réel */
+.notification-item.new {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 /* Styles pour les différents types de notifications */
 .notification-item.breakdown .notification-icon { color: #faad14; }
 .notification-item.acceptance .notification-icon { color: #52c41a; }

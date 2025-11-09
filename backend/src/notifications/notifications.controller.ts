@@ -52,6 +52,25 @@ export class NotificationsController {
     return { count };
   }
 
+
+@Get('unread-count/driver/:driverId')
+async getUnreadCountForDriver(@Param('driverId', ParseIntPipe) driverId: number): Promise<{ count: number }> {
+  const count = await this.notificationsService.getUnreadCountForDriver(driverId);
+  return { count };
+}
+
+@Get('unread/driver/:driverId')
+async findUnreadByDriver(@Param('driverId', ParseIntPipe) driverId: number): Promise<Notification[]> {
+  return this.notificationsService.findUnreadByDriver(driverId);
+}
+
+@Put('mark-all-read/driver/:driverId')
+async markAllAsReadForDriver(@Param('driverId', ParseIntPipe) driverId: number): Promise<{ message: string }> {
+  await this.notificationsService.markAllAsReadForDriver(driverId);
+  return { message: 'Toutes les notifications ont été marquées comme lues' };
+}
+
+
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number): Promise<Notification> {
     return this.notificationsService.findOne(id);
