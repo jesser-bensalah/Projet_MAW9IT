@@ -34,6 +34,10 @@ const MechanicDashboard = () => {
     navigate('/mechanic/breakdowns');
   };
 
+  const goToInterventionHistory = () => {
+    navigate('/mechanic/interventions');
+  };
+
   // Si pas d'utilisateur, ne rien afficher
   if (!user) {
     return null;
@@ -82,7 +86,7 @@ const MechanicDashboard = () => {
           <div className="dashboard-card">
             <h3>📋 Interventions</h3>
             <p>Historique des interventions</p>
-            <button className="card-btn">Consulter</button>
+            <button className="card-btn" onClick={goToInterventionHistory}>Consulter</button>
           </div>
         </div>
       </main>

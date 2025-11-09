@@ -22,7 +22,7 @@ import ListeCasDepart from './pages/ListeCasDepart';
 import Map from './pages/Map';
 import BreakdownAlerts from "./components/mechanic/BreakdownAlerts";
 import ProtectedRoute from './components/ProtectedRoute';
-
+import InterventionHistory from './components/mechanic/InterventionHistory';
 function App() {
   return (
     <Router>
@@ -35,9 +35,10 @@ function App() {
           <Route path="/driver/dashboard" element={<DriverDashboard />} />
           <Route path="/mechanic/dashboard" element={<MechanicDashboard />} />
           <Route path="/admin/users" element={<UserManagement />} />
+          <Route path="/formulairemecanicien" element={<FormulaireMecanicien />} />
           <Route path="/formulairechauffeur" element={<FormulaireChauffeur />} />
           <Route path="/liste-chauffeurs" element={<ListeChauffeur />} />
-          <Route path="/formulairemecanicien" element={<FormulaireMecanicien />} />
+          
           <Route path="/liste-mecaniciens" element={<ListeMecanicien />} />
           <Route path="/cas-retard" element={<CasRetard />} />
           <Route path="/liste-cas-retard" element={<ListeCasRetard />} />
@@ -55,6 +56,14 @@ function App() {
             element={
               <ProtectedRoute allowedRoles={['mecanicien']}>
                 <BreakdownAlerts />
+              </ProtectedRoute>
+            } 
+          />
+           <Route 
+            path="/mechanic/interventions" 
+            element={
+              <ProtectedRoute allowedRoles={['mecanicien']}>
+                <InterventionHistory />
               </ProtectedRoute>
             } 
           />
