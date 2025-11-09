@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'; 
 import image from '../assets/giphy (1).gif'
 import '../App.css';
 import { servicesrvice } from '../serviceservice/serviceservice';
+import { notificationsService } from '../services/notificationsService';
+import { usersService } from '../services/usersService';
 
 const CasPanne = () => {
   const navigate = useNavigate(); 
@@ -13,6 +15,25 @@ const CasPanne = () => {
     matricule: '',
     typepanne: ''
   });
+  const [mechanics, setMechanics] = useState([]);
+  const [selectedMechanic, setSelectedMechanic] = useState('');
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  useEffect(() => {
+    loadMechanics();
+  }, []);
+
+  const loadMechanics = async () => {
+    try {
+      const response = await usersService.getMechanics();
+      setMechanics(response.data);
+      if (response.data.length > 0) {
+        setSelectedMechanic(response.data[0].id);
+      }
+    } catch (error) {
+      console.error('Erreur lors du chargement des mécaniciens:', error);
+    }
+  };
 
   const handleChange = (e) => {
     let fieldName = e.target.id;
@@ -22,13 +43,38 @@ const CasPanne = () => {
       'modele': 'modele', 
       'matricule': 'matricule',
       'typepanne': 'typepanne',
-      'dropdown': 'typepanne'
+      'dropdown': 'typepanne',
+      'mechanic': 'mechanic'
     };
     fieldName = idMapping[fieldName] || fieldName;
-    setFormData({
-      ...formData,
-      [fieldName]: e.target.value
-    });
+    
+    if (fieldName === 'mechanic') {
+      setSelectedMechanic(e.target.value);
+    } else {
+      setFormData({
+        ...formData,
+        [fieldName]: e.target.value
+      });
+    }
+  };
+
+  const sendBreakdownNotification = async (mechanicId) => {
+    try {
+      const notificationData = {
+        type: 'breakdown',
+        title: '🚨 Nouvelle panne signalée',
+        message: `Panne de type "${formData.typepanne}" sur le véhicule ${formData.marque} ${formData.modele} (${formData.matricule})`,
+        driverId: user.id,
+        mechanicId: parseInt(mechanicId),
+        vehicleInfo: `${formData.marque} ${formData.modele} - ${formData.matricule}`,
+        location: 'Localisation à déterminer'
+      };
+      
+      await notificationsService.createNotification(notificationData);
+      console.log('Notification de panne envoyée au mécanicien:', mechanicId);
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi de la notification:', error);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -36,14 +82,27 @@ const CasPanne = () => {
     console.log('Données à envoyer:', formData);
     
     // Validation des champs obligatoires
-    if (!formData.nom || !formData.marque || !formData.modele || !formData.matricule || !formData.typepanne) {
+    if (!formData.nom || !formData.marque || !formData.modele || !formData.matricule || !formData.typepanne || !selectedMechanic) {
       alert('Veuillez remplir tous les champs obligatoires !');
       return;
     }
     
     try {
+      // 1. Enregistrer la panne dans la base de données
       await servicesrvice.createPanne(formData);
-      alert('Cas de panne enregistrée avec succès !');
+      
+      // 2. Envoyer une notification à tous les mécaniciens (ou au mécanicien sélectionné)
+      if (selectedMechanic === 'all') {
+        // Envoyer à tous les mécaniciens
+        for (const mechanic of mechanics) {
+          await sendBreakdownNotification(mechanic.id);
+        }
+      } else {
+        // Envoyer au mécanicien sélectionné
+        await sendBreakdownNotification(selectedMechanic);
+      }
+      
+      alert('Cas de panne enregistrée et notification envoyée avec succès !');
       setFormData({
         nom: '',
         marque: '',
@@ -51,6 +110,8 @@ const CasPanne = () => {
         matricule: '',
         typepanne: ''
       });
+      setSelectedMechanic(mechanics.length > 0 ? mechanics[0].id : '');
+      
       // Navigation vers la table après l'enregistrement réussi
       navigate('/liste-cas-panne');
     } catch (error) {
@@ -126,11 +187,26 @@ const CasPanne = () => {
                   <option value="Batterie">Batterie</option>
                   <option value="Réseau">Réseau</option>
                   <option value="Moteur">Moteur</option>
+                  <option value="Freins">Freins</option>
+                  <option value="Pneus">Pneus</option>
+                  <option value="Électricité">Électricité</option>
+                </select>
+              </div>
+
+              <label htmlFor="mechanic">Mécanicien à notifier</label>
+              <div className="input flex">
+                <select id="mechanic" value={selectedMechanic} onChange={handleChange}>
+                  <option value="all">Tous les mécaniciens</option>
+                  {mechanics.map(mechanic => (
+                    <option key={mechanic.id} value={mechanic.id}>
+                      {mechanic.prenom} {mechanic.nom} - {mechanic.email}
+                    </option>
+                  ))}
                 </select>
               </div>
               
               <div className="buttonContainer">
-                <button type='submit' className='btn'>Enregistrer</button>
+                <button type='submit' className='btn'>Enregistrer </button>
                 <button type='button' className='btn1' onClick={goToDashChauffeur}>Retour</button>
               </div>
             </div>
@@ -141,4 +217,4 @@ const CasPanne = () => {
   )
 }
 
-export default CasPanne
+export default CasPanne;

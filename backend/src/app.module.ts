@@ -11,6 +11,7 @@ import { CasretardModule } from './casretard/casretard.module';
 import { MessagesModule } from './messages/messages.module';
 import { CasdepartModule } from './casdepart/casdepart.module';
 import { MapModule } from './map/map.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
   imports: [
@@ -52,6 +53,7 @@ import { MapModule } from './map/map.module';
     MessagesModule,
     CasdepartModule,
     MapModule,
+    NotificationsModule,
   ],
 })
 export class AppModule {}

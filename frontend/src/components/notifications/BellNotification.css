@@ -1,0 +1,184 @@
+.bell-notification-container {
+  position: relative;
+  display: inline-block;
+}
+
+.bell-icon {
+  position: relative;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.bell-icon:hover {
+  background-color: #f8f9fa;
+}
+
+.bell {
+  font-size: 1.5rem;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #e74c3c;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.notifications-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 350px;
+  background: white;
+  border: 1px solid #e1e8ed;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  z-index: 1000;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.dropdown-header {
+  padding: 1rem;
+  border-bottom: 1px solid #e1e8ed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown-header h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1rem;
+}
+
+.mark-all-read {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.mark-all-read:hover {
+  background: #2980b9;
+}
+
+.notifications-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  padding: 1rem;
+  border-bottom: 1px solid #f8f9fa;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.notification-item:hover {
+  background-color: #f8f9fa;
+}
+
+.notification-item.unread {
+  background-color: #e8f4fd;
+  border-left: 3px solid #3498db;
+}
+
+.notification-item.read {
+  opacity: 0.8;
+}
+
+.notification-breakdown.unread {
+  border-left-color: #e74c3c;
+  background-color: #fdedec;
+}
+
+.notification-accepted.unread {
+  border-left-color: #27ae60;
+  background-color: #eafaf1;
+}
+
+.notification-rejected.unread {
+  border-left-color: #f39c12;
+  background-color: #fef9e7;
+}
+
+.notification-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.notification-content {
+  flex: 1;
+}
+
+.notification-title {
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 0.25rem;
+}
+
+.notification-message {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.notification-meta {
+  font-size: 0.8rem;
+  color: #95a5a6;
+  margin-bottom: 0.25rem;
+}
+
+.notification-time {
+  font-size: 0.7rem;
+  color: #bdc3c7;
+}
+
+.no-notifications {
+  padding: 2rem;
+  text-align: center;
+  color: #95a5a6;
+  font-style: italic;
+}
+
+.dropdown-footer {
+  padding: 1rem;
+  border-top: 1px solid #e1e8ed;
+  text-align: center;
+}
+
+.view-all-link {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.view-all-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .notifications-dropdown {
+    width: 300px;
+    right: -50px;
+  }
+}

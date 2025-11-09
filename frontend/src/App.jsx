@@ -20,6 +20,9 @@ import Chat from './components/Chat';
 import CasDepart from './pages/CasDepart';
 import ListeCasDepart from './pages/ListeCasDepart';
 import Map from './pages/Map';
+import BreakdownAlerts from "./components/mechanic/BreakdownAlerts";
+import ProtectedRoute from './components/ProtectedRoute';
+
 function App() {
   return (
     <Router>
@@ -31,7 +34,7 @@ function App() {
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/driver/dashboard" element={<DriverDashboard />} />
           <Route path="/mechanic/dashboard" element={<MechanicDashboard />} />
-            <Route path="/admin/users" element={<UserManagement />} />
+          <Route path="/admin/users" element={<UserManagement />} />
           <Route path="/formulairechauffeur" element={<FormulaireChauffeur />} />
           <Route path="/liste-chauffeurs" element={<ListeChauffeur />} />
           <Route path="/formulairemecanicien" element={<FormulaireMecanicien />} />
@@ -45,6 +48,16 @@ function App() {
           <Route path="/cas-depart" element={<CasDepart />} />
           <Route path="/liste-cas-depart" element={<ListeCasDepart />} />
           <Route path="/map" element={<Map />} />
+          
+          {/* Nouvelle route protégée pour les mécaniciens */}
+          <Route 
+            path="/mechanic/breakdowns" 
+            element={
+              <ProtectedRoute allowedRoles={['mecanicien']}>
+                <BreakdownAlerts />
+              </ProtectedRoute>
+            } 
+          />
         </Routes>
       </div>
     </Router>

@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
+import DriverBellNotification from '../driver/DriverBellNotification';
 
 const DriverDashboard = () => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem('user'));
+
+  // Vérifier l'authentification au chargement
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token || user?.role !== 'chauffeur') {
+      navigate('/login');
+      return;
+    }
+  }, [navigate, user]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -12,7 +22,7 @@ const DriverDashboard = () => {
     navigate('/');
   };
 
-    const goToForm = () => {
+  const goToForm = () => {
     navigate('/formulairechauffeur');
   };
 
@@ -36,6 +46,10 @@ const DriverDashboard = () => {
     navigate('/cas-depart');
   };
 
+  // Si pas d'utilisateur, ne rien afficher
+  if (!user) {
+    return null;
+  }
 
   return (
     <div className="dashboard-container">
@@ -44,9 +58,16 @@ const DriverDashboard = () => {
           <h1>Maw9it - Dashboard Chauffeur</h1>
           <div className="nav-actions">
             <span>Bienvenue, {user?.prenom} {user?.nom}</span>
-            <button onClick={handleLogout} className="logout-btn">
-              Déconnexion
-            </button>
+            <div className="nav-buttons">
+              {user && (
+                <div className="notification-bell">
+                  <DriverBellNotification userId={user.id} />
+                </div>
+              )}
+              <button onClick={handleLogout} className="logout-btn">
+                Déconnexion
+              </button>
+            </div>
           </div>
         </div>
       </nav>

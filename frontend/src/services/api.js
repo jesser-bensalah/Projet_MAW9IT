@@ -10,9 +10,14 @@ const api = axios.create({
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
-    config.headers.Authorization = `Bearer ${token}`; // Fixed: added backticks
+    config.headers.Authorization = `Bearer ${token}`;
+    // Ajouter des en-têtes CORS
+    config.headers['Content-Type'] = 'application/json';
+    config.headers['Accept'] = 'application/json';
   }
   return config;
+}, (error) => {
+  return Promise.reject(error);
 });
 
 // Intercepteur pour gérer les réponses d'erreur
@@ -23,7 +28,10 @@ api.interceptors.response.use(
       // Token expiré ou invalide
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      window.location.href = '/login';
+      // Utiliser window.location pour forcer un rechargement complet
+      if (window.location.pathname !== '/login') {
+        window.location.href = '/login';
+      }
     }
     return Promise.reject(error);
   }

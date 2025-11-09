@@ -59,7 +59,6 @@ export const servicesrvice = {
     return response.data;
   },
 
-  
   createRetard: async (data) => {
     const response = await API.post('/casretard', data);
     return response.data;

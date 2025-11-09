@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import BellNotification from '../notifications/BellNotification';
 import './Dashboard.css';
 
 const MechanicDashboard = () => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem('user'));
+
+  // Vérifier l'authentification au chargement
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token || user?.role !== 'mecanicien') {
+      navigate('/login');
+      return;
+    }
+  }, [navigate, user]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -12,14 +22,22 @@ const MechanicDashboard = () => {
     navigate('/');
   };
 
-    const goToFomMecanicien = () => {
+  const goToFomMecanicien = () => {
     navigate('/formulairemecanicien');
   };
 
-   const goToMessagerie = () => {
+  const goToMessagerie = () => {
     navigate('/chat');
   };
 
+  const goToBreakdownAlerts = () => {
+    navigate('/mechanic/breakdowns');
+  };
+
+  // Si pas d'utilisateur, ne rien afficher
+  if (!user) {
+    return null;
+  }
 
   return (
     <div className="dashboard-container">
@@ -27,6 +45,7 @@ const MechanicDashboard = () => {
         <div className="nav-content">
           <h1>Maw9it - Dashboard Mécanicien</h1>
           <div className="nav-actions">
+            <BellNotification userId={user.id} userRole={user.role} />
             <span>Bienvenue, {user?.prenom} {user?.nom}</span>
             <button onClick={handleLogout} className="logout-btn">
               Déconnexion
@@ -51,7 +70,7 @@ const MechanicDashboard = () => {
           <div className="dashboard-card">
             <h3>🚨 Alertes Pannes</h3>
             <p>Voir les chauffeurs en panne</p>
-            <button className="card-btn">Voir alertes</button>
+            <button className="card-btn" onClick={goToBreakdownAlerts}>Voir alertes</button>
           </div>
 
           <div className="dashboard-card">

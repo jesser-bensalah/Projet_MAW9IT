@@ -1,0 +1,293 @@
+.bell-notification-container {
+  position: relative;
+  display: inline-block;
+}
+
+.bell-icon {
+  position: relative;
+  cursor: pointer;
+  padding: 8px;
+  font-size: 1.5rem;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.bell-icon:hover {
+  color: #1890ff;
+}
+
+.notification-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #ff4d4f;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.notifications-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 350px;
+  max-height: 500px;
+  overflow-y: auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  margin-top: 8px;
+  padding: 0;
+}
+
+.dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  background-color: #fafafa;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.dropdown-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.mark-all-read {
+  background: none;
+  border: none;
+  color: #1890ff;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.mark-all-read:hover {
+  background-color: #e6f7ff;
+}
+
+.notifications-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.notification-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.notification-item:hover {
+  background-color: #f9f9f9;
+}
+
+.notification-item.unread {
+  background-color: #f6ffed;
+}
+
+.notification-item.unread:hover {
+  background-color: #e6f7d5;
+}
+
+.notification-icon {
+  font-size: 1.2rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.notification-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.notification-title {
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notification-message {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notification-time {
+  font-size: 0.75rem;
+  color: #999;
+}
+
+.no-notifications {
+  padding: 16px;
+  text-align: center;
+  color: #999;
+  font-style: italic;
+}
+
+/* Animation de la cloche */
+@keyframes ring {
+  0% { transform: rotate(0); }
+  10% { transform: rotate(15deg); }
+  20% { transform: rotate(-15deg); }
+  30% { transform: rotate(10deg); }
+  40% { transform: rotate(-10deg); }
+  50%, 100% { transform: rotate(0); }
+}
+
+/* Ajoutez ces styles à la fin du fichier */
+
+.loading-notifications {
+  padding: 20px;
+  text-align: center;
+  color: #999;
+}
+
+.loading-spinner {
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #1890ff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.notification-sender {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+/* Styles spécifiques pour les types de notifications */
+.notification-item.acceptance {
+  border-left: 3px solid #52c41a;
+}
+
+.notification-item.rejection {
+  border-left: 3px solid #ff4d4f;
+}
+
+.notification-item.resolved {
+  border-left: 3px solid #1890ff;
+}
+
+.notification-item.breakdown {
+  border-left: 3px solid #faad14;
+}
+
+.bell-ring {
+  animation: ring 1s ease-in-out;
+  display: inline-block;
+}
+/* Styles pour les réponses des mécaniciens */
+.notification-status {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.notification-status strong {
+  color: #333;
+}
+
+.notification-sender strong {
+  color: #333;
+}
+
+/* Styles spécifiques pour les types de réponses */
+.notification-item.acceptance {
+  border-left: 4px solid #52c41a;
+  background: linear-gradient(135deg, #f6ffed 0%, #f6ffed 100%);
+}
+
+.notification-item.rejection {
+  border-left: 4px solid #ff4d4f;
+  background: linear-gradient(135deg, #fff2f0 0%, #fff2f0 100%);
+}
+
+.notification-item.resolved {
+  border-left: 4px solid #1890ff;
+  background: linear-gradient(135deg, #e6f7ff 0%, #e6f7ff 100%);
+}
+
+.notification-item.unread {
+  background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+}
+
+.dropdown-footer {
+  padding: 12px 16px;
+  border-top: 1px solid #f0f0f0;
+  text-align: center;
+}
+
+.view-all-breakdowns {
+  background: #1890ff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.view-all-breakdowns:hover {
+  background: #40a9ff;
+}
+
+.loading-notifications {
+  padding: 20px;
+  text-align: center;
+  color: #999;
+}
+
+.loading-spinner {
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #1890ff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Styles pour les différents types de notifications */
+.notification-item.breakdown .notification-icon { color: #faad14; }
+.notification-item.acceptance .notification-icon { color: #52c41a; }
+.notification-item.rejection .notification-icon { color: #ff4d4f; }
