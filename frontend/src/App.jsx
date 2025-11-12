@@ -23,6 +23,8 @@ import Map from './pages/Map';
 import BreakdownAlerts from "./components/mechanic/BreakdownAlerts";
 import ProtectedRoute from './components/ProtectedRoute';
 import InterventionHistory from './components/mechanic/InterventionHistory';
+import Chatbot from './components/Chatbot/Chatbot';
+import ChatbotIcon from './components/Chatbot/ChatbotIcon';
 function App() {
   return (
     <Router>
@@ -49,6 +51,8 @@ function App() {
           <Route path="/cas-depart" element={<CasDepart />} />
           <Route path="/liste-cas-depart" element={<ListeCasDepart />} />
           <Route path="/map" element={<Map />} />
+          <Route path="/chatbot" element={<Chatbot />} />
+          <Route path="/chatboticon" element={<ChatbotIcon />} />
           
           {/* Nouvelle route protégée pour les mécaniciens */}
           <Route 

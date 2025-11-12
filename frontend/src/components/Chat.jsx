@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
+import Chatbot from './Chatbot/Chatbot';
 
 const socket = io('http://localhost:3000'); // URL explicite
 
@@ -133,6 +134,7 @@ function Chat() {
       }}>
         Vous êtes: <strong>{username}</strong>
       </div>
+      <Chatbot />
     </div>
   );
 }
