@@ -1,40 +1,51 @@
-import { Injectable } from '@nestjs/common';
+// src/caspanne/caspanne.service.ts
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateCaspanneDto } from './dto/create-caspanne.dto';
 import { UpdateCaspanneDto } from './dto/update-caspanne.dto';
 import { Caspanne } from './entities/caspanne.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 
 @Injectable()
 export class CaspanneService {
-   constructor(
-        @InjectRepository(Caspanne) private readonly casPanneRepository: Repository<Caspanne>,
-      ) {}
-      async create(createCaspanneDto: CreateCaspanneDto) {
-        const casPanne = this.casPanneRepository.create(createCaspanneDto);
-    
-        return await this.casPanneRepository.save(casPanne);
-      }
+  constructor(
+    @InjectRepository(Caspanne)
+    private readonly casPanneRepository: Repository<Caspanne>,
+  ) { }
 
-  findAll() {
-    return this.casPanneRepository.find();
+ 
+  async create(createCaspanneDto: CreateCaspanneDto): Promise<Caspanne> {
+    const casPanne = this.casPanneRepository.create(createCaspanneDto);
+    return await this.casPanneRepository.save(casPanne);
   }
 
-  findOne(idCasPanne: number) {
-    return this.casPanneRepository.find({ where : {idCasPanne}});
+ 
+  async findAll(): Promise<Caspanne[]> {
+    return await this.casPanneRepository.find();
   }
 
-  async update(idCasPanne: number, updateCaspanneDto: UpdateCaspanneDto) {
-    
-      const panne = await this.casPanneRepository.findOne({ where: { idCasPanne } });
-      if (!panne) {
-        throw new Error('Cas de panne non trouvé');
-      }
-      Object.assign(panne, updateCaspanneDto);
-      return this.casPanneRepository.save(panne);
+  
+  async findOne(idCasPanne: number): Promise<Caspanne> {
+    const caspanne = await this.casPanneRepository.findOneBy({ idCasPanne });
+    if (!caspanne) {
+      throw new NotFoundException(`Cas de panne avec l'ID ${idCasPanne} non trouvé`);
     }
+    return caspanne;
+  }
 
-  remove(idCasPanne: number) {
-    return this.casPanneRepository.delete(idCasPanne);
+ 
+  async update(idCasPanne: number, updateCaspanneDto: UpdateCaspanneDto): Promise<Caspanne> {
+    const panne = await this.casPanneRepository.findOneBy({ idCasPanne });
+    if (!panne) {
+      throw new NotFoundException(`Cas de panne avec l'ID ${idCasPanne} non trouvé`);
+    }
+    Object.assign(panne, updateCaspanneDto);
+    return await this.casPanneRepository.save(panne);
+  }
+
+  
+  async remove(idCasPanne: number): Promise<void> {
+    await this.casPanneRepository.delete(idCasPanne);
   }
 }
+

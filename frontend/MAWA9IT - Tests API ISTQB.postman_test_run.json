@@ -1,0 +1,146 @@
+{
+	"id": "ca8723e1-e25a-4141-99af-f3954ed40c7a",
+	"name": "MAWA9IT - Tests API ISTQB",
+	"timestamp": "2025-11-24T21:29:25.772Z",
+	"collection_id": "26310740-247cd3d1-bb2d-46c4-8463-11028a2ed71d",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 4,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2025-11-24T21:29:24.276Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "b54c9c45-b93a-4ba8-81c8-d52b6e3fd69a",
+			"name": "Créer une panne",
+			"url": "https://template.postman-echo.com/info",
+			"time": 273,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				273
+			],
+			"allTests": [
+				{
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "8dddc7d8-c3b7-4834-a5eb-3692918e19b7",
+			"name": "Lister toutes les pannes",
+			"url": "https://template.postman-echo.com/info?id=1",
+			"time": 240,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				240
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "70e1d58e-a589-4dff-a3df-f676ab355496",
+			"name": "Modification",
+			"url": "https://template.postman-echo.com/info?id=1",
+			"time": 228,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Successful PUT request": true
+			},
+			"testPassFailCounts": {
+				"Successful PUT request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				228
+			],
+			"allTests": [
+				{
+					"Successful PUT request": true
+				}
+			]
+		},
+		{
+			"id": "3c9817cd-371c-4b1f-9812-6d7f20c3f26d",
+			"name": "Suppression",
+			"url": "https://template.postman-echo.com/info?id=1",
+			"time": 189,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Successful DELETE request": true
+			},
+			"testPassFailCounts": {
+				"Successful DELETE request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				189
+			],
+			"allTests": [
+				{
+					"Successful DELETE request": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 930,
+	"collection": {
+		"requests": [
+			{
+				"id": "b54c9c45-b93a-4ba8-81c8-d52b6e3fd69a",
+				"method": "POST"
+			},
+			{
+				"id": "8dddc7d8-c3b7-4834-a5eb-3692918e19b7",
+				"method": "GET"
+			},
+			{
+				"id": "70e1d58e-a589-4dff-a3df-f676ab355496",
+				"method": "PUT"
+			},
+			{
+				"id": "3c9817cd-371c-4b1f-9812-6d7f20c3f26d",
+				"method": "DELETE"
+			}
+		]
+	}
+}
