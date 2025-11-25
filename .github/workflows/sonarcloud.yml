@@ -38,8 +38,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >-
-            -Dsonar.projectKey=mawa9it-jesserbensalah-2025
-            -Dsonar.organization=mawa9it-jesserbensalah-2025
+            -Dsonar.projectKey=mawa9it-JesserBensalah-2025
+            -Dsonar.organization=mawa9it-JesserBensalah-2025
             -Dsonar.projectName=MAWA9IT
             -Dsonar.sources=backend/src/caspanne
             -Dsonar.tests=backend/src/caspanne
