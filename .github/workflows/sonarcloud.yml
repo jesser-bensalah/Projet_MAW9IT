@@ -46,4 +46,4 @@ jobs:
             -Dsonar.test.inclusions=**/*.spec.ts
             -Dsonar.typescript.lcov.reportPaths=backend/coverage-caspanne/lcov.info
             -Dsonar.sourceEncoding=UTF-8
-            -Dsonar.projectName=MAWA9IT - Cas de Panne (Shift-Left)
+            -Dsonar.projectName="MAWA9IT - Cas de Panne (Shift-Left)"
