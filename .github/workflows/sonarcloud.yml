@@ -37,7 +37,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          args: >
+          args: >-
             -Dsonar.projectKey=mawa9it-jesserbensalah-2025
             -Dsonar.organization=mawa9it-jesserbensalah-2025
             -Dsonar.projectName=MAWA9IT
@@ -47,4 +47,3 @@ jobs:
             -Dsonar.typescript.lcov.reportPaths=backend/coverage-caspanne/lcov.info
             -Dsonar.sourceEncoding=UTF-8
             -Dsonar.qualitygate.wait=true
-            # Fallback pour branches : SonarCloud détectera auto 'dev' comme default
