@@ -109,16 +109,16 @@ describe('CaspanneService', () => {
     });
   });
 
-it(' lance NotFoundException si panne inexistante', async () => {
-  
-  jest.spyOn(repository, 'findOneBy').mockResolvedValueOnce(null);
+  it(' lance NotFoundException si panne inexistante', async () => {
+
+    jest.spyOn(repository, 'findOneBy').mockResolvedValueOnce(null);
 
 
-  await expect(service.update(999, { nom: 'Test' }))
-    .rejects
-    .toThrow(NotFoundException);
-  expect(repository.findOneBy).toHaveBeenCalledWith({ idCasPanne: 999 });
-});
+    await expect(service.update(999, { nom: 'Test' }))
+      .rejects
+      .toThrow(NotFoundException);
+    expect(repository.findOneBy).toHaveBeenCalledWith({ idCasPanne: 999 });
+  });
 
 });
 
