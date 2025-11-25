@@ -39,11 +39,14 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.projectKey=MAWA9IT-caspanne-votre-nom-2025
-            -Dsonar.organization=votre-org-sonarqube
+            -Dsonar.projectKey=mawa9it-JesserBensaleh-2025
+            -Dsonar.organization=mawa9it-JesserBensaleh-2025
             -Dsonar.sources=backend/src/caspanne
             -Dsonar.tests=backend/src/caspanne
             -Dsonar.test.inclusions=**/*.spec.ts
             -Dsonar.typescript.lcov.reportPaths=backend/coverage-caspanne/lcov.info
             -Dsonar.sourceEncoding=UTF-8
-            -Dsonar.projectName="MAWA9IT - Cas de Panne (Shift-Left)"
+            -Dsonar.projectName="MAWA9IT"
+
+
+  
