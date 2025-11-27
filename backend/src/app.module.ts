@@ -30,6 +30,7 @@ import { NotificationsModule } from './notifications/notifications.module';
         synchronize: true,
         retryAttempts: 5,
         retryDelay: 3000,
+        autoLoadEntities: true,
       }),
     }),
     JwtModule.registerAsync({

@@ -1,0 +1,628 @@
+[
+  {
+    "description": "  En tant que chauffeur\n  Je veux pouvoir signaler des pannes via l'interface\n  Afin de notifier rapidement les mécaniciens",
+    "elements": [
+      {
+        "description": "",
+        "id": "interface-de-gestion-des-cas-de-panne;signalement-réussi-d'une-panne-complète",
+        "keyword": "Scénario",
+        "line": 11,
+        "name": "Signalement réussi d'une panne complète",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 2161700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Étant donné que ",
+            "line": 8,
+            "name": "je suis connecté en tant que chauffeur",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:30"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1153199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et que ",
+            "line": 9,
+            "name": "je suis sur la page de signalement de panne",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:36"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 634000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Quand ",
+            "line": 12,
+            "name": "je remplis le formulaire avec des données valides",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:42"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2283999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 13,
+            "name": "je sélectionne un mécanicien",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:88"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1057000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 14,
+            "name": "je clique sur le bouton \"Enregistrer\"",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:94"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1454899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Alors ",
+            "line": 15,
+            "name": "je vois un message de succès",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:128"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2217299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 16,
+            "name": "je suis redirigé vers la liste des cas de panne",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:155"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1558699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 17,
+            "name": "une notification est envoyée au mécanicien",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:166"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1493199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 18,
+            "name": "les données sont sauvegardées dans la base de données",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:173"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3289400
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "interface-de-gestion-des-cas-de-panne;tentative-de-soumission-avec-formulaire-incomplet",
+        "keyword": "Scénario",
+        "line": 20,
+        "name": "Tentative de soumission avec formulaire incomplet",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 412500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Étant donné que ",
+            "line": 8,
+            "name": "je suis connecté en tant que chauffeur",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:30"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 611400
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et que ",
+            "line": 9,
+            "name": "je suis sur la page de signalement de panne",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:36"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 485300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Quand ",
+            "line": 21,
+            "name": "je remplis seulement le champ nom",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:56"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 482500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 22,
+            "name": "je clique sur le bouton \"Enregistrer\"",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:94"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 867200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Alors ",
+            "line": 23,
+            "name": "je vois un message d'erreur",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:133"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 841099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 24,
+            "name": "le formulaire n'est pas soumis",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:144"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 872200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 25,
+            "name": "je reste sur la page de signalement de panne",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:150"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 582500
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "interface-de-gestion-des-cas-de-panne;navigation-vers-le-tableau-de-bord",
+        "keyword": "Scénario",
+        "line": 27,
+        "name": "Navigation vers le tableau de bord",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 408900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Étant donné que ",
+            "line": 8,
+            "name": "je suis connecté en tant que chauffeur",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:30"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 432999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et que ",
+            "line": 9,
+            "name": "je suis sur la page de signalement de panne",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:36"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 351599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Quand ",
+            "line": 28,
+            "name": "je clique sur le bouton \"Retour\"",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:94"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 835100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Alors ",
+            "line": 29,
+            "name": "je suis redirigé vers le tableau de bord chauffeur",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:161"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 573499
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "interface-de-gestion-des-cas-de-panne;signalement-avec-différents-types-de-panne",
+        "keyword": "Scénario",
+        "line": 31,
+        "name": "Signalement avec différents types de panne",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 636999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Étant donné que ",
+            "line": 8,
+            "name": "je suis connecté en tant que chauffeur",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:30"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 564200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et que ",
+            "line": 9,
+            "name": "je suis sur la page de signalement de panne",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:36"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 550199
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Quand ",
+            "line": 32,
+            "name": "je remplis le champ nom avec \"Pierre Martin\"",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:63"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 675700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 33,
+            "name": "je remplis le champ marque avec \"Toyota\"",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:68"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 651799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 34,
+            "name": "je remplis le champ modèle avec \"Corolla\"",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:73"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 742500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 35,
+            "name": "je remplis le champ matricule avec \"XYZ789\"",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:78"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1089600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 36,
+            "name": "je sélectionne le type de panne \"Moteur\"",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:83"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1277099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 37,
+            "name": "je sélectionne un mécanicien",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:88"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 696500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 38,
+            "name": "je clique sur le bouton \"Enregistrer\"",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:94"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1350599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Alors ",
+            "line": 39,
+            "name": "je vois un message de succès",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:128"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 733899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 40,
+            "name": "le champ nom contient la valeur \"Pierre Martin\"",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:181"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 869699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 41,
+            "name": "le champ marque contient la valeur \"Toyota\"",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:186"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 931899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 42,
+            "name": "le champ typepanne contient la valeur \"Moteur\"",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:191"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 542999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 43,
+            "name": "je suis redirigé vers la liste des cas de panne",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:155"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 408899
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "interface-de-gestion-des-cas-de-panne;affichage-des-messages-appropriés",
+        "keyword": "Scénario",
+        "line": 45,
+        "name": "Affichage des messages appropriés",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 433600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Étant donné que ",
+            "line": 8,
+            "name": "je suis connecté en tant que chauffeur",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:30"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 468899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et que ",
+            "line": 9,
+            "name": "je suis sur la page de signalement de panne",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:36"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 375099
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Quand ",
+            "line": 46,
+            "name": "je remplis le formulaire avec des données valides",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:42"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1580000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 47,
+            "name": "je clique sur le bouton \"Enregistrer\"",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:94"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 819999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Alors ",
+            "line": 48,
+            "name": "le système affiche \"Cas de panne enregistré avec succès\"",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:138"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 810299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 49,
+            "name": "je suis redirigé vers la liste des cas de panne",
+            "match": {
+              "location": "features\\step-definitions\\mock-steps.js:155"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 382100
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "interface-de-gestion-des-cas-de-panne",
+    "line": 2,
+    "keyword": "Fonctionnalité",
+    "name": "Interface de gestion des cas de panne",
+    "tags": [],
+    "uri": "features\\gestion-pannes.feature"
+  }
+]

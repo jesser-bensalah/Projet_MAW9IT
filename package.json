@@ -1,5 +1,16 @@
 {
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build", 
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:run": "vitest run"
+  },
   "devDependencies": {
+     "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
+    "jsdom": "^22.1.0",
     "@vitejs/plugin-react": "^5.0.4",
     "vite": "^7.1.9"
   }

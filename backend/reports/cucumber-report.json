@@ -1,0 +1,127 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "test-simple-de-l'api-caspanne;test-basique-de-création",
+        "keyword": "Scénario",
+        "line": 4,
+        "name": "Test basique de création",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 255169899
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "nom",
+                      "Jean Dupont"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "marque",
+                      "Mercedes"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "modele",
+                      "C200"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "matricule",
+                      "ABC123"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "typepanne",
+                      "Batterie"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Étant donné ",
+            "line": 5,
+            "name": "un cas de panne complet avec:",
+            "match": {
+              "location": "features\\step-definitions\\all-steps.ts:61"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12252700
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Quand ",
+            "line": 11,
+            "name": "j'envoie une requête POST à \"/caspanne\"",
+            "match": {
+              "location": "features\\step-definitions\\all-steps.ts:108"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1087167600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Alors ",
+            "line": 12,
+            "name": "je reçois une réponse 201",
+            "match": {
+              "location": "features\\step-definitions\\all-steps.ts:149"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3773900
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Et ",
+            "line": 13,
+            "name": "le cas de panne est créé avec succès",
+            "match": {
+              "location": "features\\step-definitions\\all-steps.ts:154"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10316699
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 39852399
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "test-simple-de-l'api-caspanne",
+    "line": 2,
+    "keyword": "Fonctionnalité",
+    "name": "Test simple de l'API Caspanne",
+    "tags": [],
+    "uri": "features\\simple-test.feature"
+  }
+]

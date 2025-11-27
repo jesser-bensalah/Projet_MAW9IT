@@ -7,9 +7,6 @@
     "@nestjs/platform-socket.io": "^11.1.8",
     "@nestjs/websockets": "^11.1.8",
     "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^6.8.0",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^13.5.0",
     "axios": "^1.13.2",
     "date-fns": "^4.1.0",
     "leaflet": "^1.9.4",
@@ -24,7 +21,16 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:acceptance": "vitest src/features/breakdown/__tests__/CasPanne.acceptance.test.tsx",
+    "test:coverage": "vitest --coverage",
+    "test:bdd": "cucumber-js --config cucumber.json",
+    "test:bdd:integration": "jest --config jest-cucumber.config.js",
+    "test:bdd:mock": "cucumber-js --require features/step-definitions/mock-steps.js --format progress",
+    "test:bdd:report": "cucumber-js --format html:reports/cucumber-report.html",
+    "test:bdd:dry": "cucumber-js --dry-run --format progress"
   },
   "eslintConfig": {
     "extends": [
@@ -45,8 +51,23 @@
     ]
   },
   "devDependencies": {
+    "@cucumber/cucumber": "^12.2.0",
+    "@cucumber/pretty-formatter": "^2.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/jest": "^30.0.0",
     "@types/leaflet": "^1.9.21",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@types/testing-library__jest-dom": "^5.14.9",
     "@vitejs/plugin-react": "^5.0.4",
-    "vite": "^7.1.9"
+    "@vitest/runner": "^4.0.13",
+    "chai": "^6.2.1",
+    "jest-cucumber": "^4.5.0",
+    "jsdom": "^27.2.0",
+    "puppeteer": "^24.31.0",
+    "vite": "^7.1.9",
+    "vitest": "^4.0.13"
   }
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CaspanneService } from './caspanne.service';
 import { CreateCaspanneDto } from './dto/create-caspanne.dto';
 import { UpdateCaspanneDto } from './dto/update-caspanne.dto';
@@ -7,14 +7,23 @@ import { UpdateCaspanneDto } from './dto/update-caspanne.dto';
 export class CaspanneController {
   constructor(private readonly caspanneService: CaspanneService) {}
 
-  @Post()
-  create(@Body() createCaspanneDto: CreateCaspanneDto) {
-    return this.caspanneService.create(createCaspanneDto);
+  @Get()
+  index() {
+    return this.caspanneService.findAll();
   }
 
   @Get()
   findAll() {
     return this.caspanneService.findAll();
+  }
+
+  @Post()
+  @UsePipes(new ValidationPipe({ 
+    whitelist: true,
+    forbidNonWhitelisted: true 
+  }))
+  create(@Body() createCaspanneDto: CreateCaspanneDto) {
+    return this.caspanneService.create(createCaspanneDto);
   }
 
   @Get(':idCasPanne')
