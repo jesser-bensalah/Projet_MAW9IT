@@ -1,8 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './PublicPage.css';
+import { useNavigate } from 'react-router-dom';
 
 const PublicPage = () => {
+    const navigate = useNavigate();
+
+  const goToMap = () => {
+    navigate('/map');
+  };
+  const goToHoraire = () => {
+    navigate('/liste-cas-depart-passager');
+  }
   return (
     <div className="public-page">
       <nav className="navbar">
@@ -30,10 +39,12 @@ const PublicPage = () => {
               <div className="info-card">
                 <h3>Horaires des bus</h3>
                 <p>Consultez les horaires en temps réel de tous les bus</p>
+                <button className="card-btn" onClick={goToHoraire}>Ouvrir</button>
               </div>
               <div className="info-card">
                 <h3>Itinéraires</h3>
-                <p>Découvrez les différents itinéraires disponibles</p>
+                <p>Découvrez les différents itinéraires disponibles</p> 
+                <button className="card-btn" onClick={goToMap}>Ouvrir</button>
               </div>
               <div className="info-card">
                 <h3>Statuts</h3>

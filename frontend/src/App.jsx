@@ -25,6 +25,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import InterventionHistory from './components/mechanic/InterventionHistory';
 import Chatbot from './components/Chatbot/Chatbot';
 import ChatbotIcon from './components/Chatbot/ChatbotIcon';
+import DepartListPassager from './pages/ListeCasDepartPassager';
 function App() {
   return (
     <Router>
@@ -53,6 +54,7 @@ function App() {
           <Route path="/map" element={<Map />} />
           <Route path="/chatbot" element={<Chatbot />} />
           <Route path="/chatboticon" element={<ChatbotIcon />} />
+          <Route path="/liste-cas-depart-passager" element={<DepartListPassager />} />
           
           {/* Nouvelle route protégée pour les mécaniciens */}
           <Route 
